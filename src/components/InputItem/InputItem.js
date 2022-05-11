@@ -32,6 +32,7 @@ export default class InputItem extends Component {
         description: "",
       },
       successTodoUpdatedMsg: "",
+      successCompletedMsg: "",
     };
   }
   componentDidMount() {
@@ -193,6 +194,46 @@ export default class InputItem extends Component {
       })
       .catch((error) => console.log("error", error));
   };
+  handleCompleteTodo = (task) => {
+    let { id, title, description, completed } = task;
+    let token = sessionStorage.getItem("token");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("title", title);
+    urlencoded.append("description", description);
+    urlencoded.append("completed", !completed);
+
+    var requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: urlencoded,
+    };
+
+    fetch(
+      "https://young-earth-00064.herokuapp.com/api/user/todos/" + id,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "success") {
+          this.setState(
+            {
+              successCompletedMsg: result.message,
+            },
+            () => this.getTaskData()
+          );
+          setTimeout(() => {
+            this.setState({
+              successCompletedMsg: ""
+            });
+          }, 1500);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
   render() {
     const { title, description } = this.state.taskData;
     if (this.state.isLoggedIn === false) {
@@ -246,6 +287,8 @@ export default class InputItem extends Component {
           <div className="alert alert-success mt-4" role="alert">{this.state.successAlertMsg}</div>}
         {this.state.successTodoUpdatedMsg !== "" &&
           <div className="alert alert-success mt-4" role="alert">{this.state.successTodoUpdatedMsg}</div>}
+        {this.state.successCompletedMsg !== "" &&
+          <div className="alert alert-success mt-4" role="alert">{this.state.successCompletedMsg}</div>}
         {/*TODO list  */}
         <TodoList
           showTaskData={this.state.showTaskData}
@@ -254,6 +297,7 @@ export default class InputItem extends Component {
           todoDeleteMsg={this.state.todoDeleteMsg}
           editTodo={this.editTodo}
           toggleEditTaskModal={this.toggleEditTaskModal}
+          handleCompleteTodo={this.handleCompleteTodo}
         />
         {/* Model for Edit Todo */}
         <EditTodo

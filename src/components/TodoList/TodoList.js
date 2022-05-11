@@ -18,6 +18,7 @@ export default class TodoList extends Component {
       handleDelete,
       todoDeleteMsg,
       editTodo,
+      handleCompleteTodo,
     } = this.props;
     let taskData = [];
     if (showTaskData.length) {
@@ -27,12 +28,16 @@ export default class TodoList extends Component {
             key={task.id}
             title={task.title}
             description={task.description}
+            completed={task.completed}
             handleDelete={() => {
               handleDelete(task.id);
             }}
             todoDeleteMsg={todoDeleteMsg}
             editTodo={() => {
               editTodo(task.id, task.title, task.description);
+            }}
+            handleCompleteTodo={() => {
+              handleCompleteTodo(task);
             }}
           />
         );
