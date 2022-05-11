@@ -126,7 +126,7 @@ export default class Registration extends Component {
         </div>
         <ThemeProvider theme={theme}>
           <div className="row mb-3">
-            <div className="col-md-6">
+            <div className="col-md-6 mb-3">
               <TextField
                 error={this.state.error}
                 name="first_name"
