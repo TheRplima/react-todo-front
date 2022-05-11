@@ -206,6 +206,7 @@ export default class InputItem extends Component {
             <TextField
               type="text"
               name="title"
+              label="Task Title"
               placeholder="Task Title"
               value={title}
               onChange={this.onChangehandler}
@@ -215,6 +216,7 @@ export default class InputItem extends Component {
             <TextField
               type="text"
               name="description"
+              label="Task description"
               placeholder="Task description"
               value={description}
               onChange={this.onChangehandler}
@@ -224,10 +226,10 @@ export default class InputItem extends Component {
             />
             <Button
               color="success"
-              className="font-weight-bold add-task"
+              className="font-weight-bold add-task btn-sm"
               onClick={this.addItem}
             >
-              +
+              New Task
             </Button>
           </ThemeProvider>
         </div>
