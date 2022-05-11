@@ -13,7 +13,7 @@ import InputItem from "./components/InputItem/InputItem";
 export default class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename="/react-todo-front">
         <Header />
         <Routes>
           <Route path="/" element={<Registration />} />
