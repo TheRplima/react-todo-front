@@ -59,7 +59,7 @@ export default class InputItem extends Component {
           );
           setTimeout(() => {
             this.setState({ successAlertMsg: "" });
-          }, 1000);
+          }, 1500);
         }
         if (result.error === false) {
           this.setState({
@@ -129,7 +129,7 @@ export default class InputItem extends Component {
           );
           setTimeout(() => {
             this.setState({ todoDeleteMsg: "" });
-          }, 1000);
+          }, 1500);
         }
       });
   };
@@ -179,17 +179,16 @@ export default class InputItem extends Component {
             {
               editTaskDataModal: false,
               editTaskData: { title, description },
+              successTodoUpdatedMsg: result.message,
             },
             () => this.getTaskData()
           );
           setTimeout(() => {
-            this.setState({ editTaskDataModal: false });
-          }, 1000);
-        }
-        if (result.errors === false) {
-          this.setState({
-            successTodoUpdatedMsg: result.message,
-          });
+            this.setState({
+              editTaskDataModal: false,
+              successTodoUpdatedMsg: ""
+            });
+          }, 1500);
         }
       })
       .catch((error) => console.log("error", error));
@@ -233,7 +232,10 @@ export default class InputItem extends Component {
             </Button>
           </ThemeProvider>
         </div>
-        <div className="text-success p-4 mt-2">{this.state.successAlertMsg}</div>
+        {this.state.successAlertMsg !== "" &&
+          <div className="alert alert-success mt-4" role="alert">{this.state.successAlertMsg}</div>}
+        {this.state.successTodoUpdatedMsg !== "" &&
+          <div className="alert alert-success mt-4" role="alert">{this.state.successTodoUpdatedMsg}</div>}
         {/*TODO list  */}
         <TodoList
           showTaskData={this.state.showTaskData}

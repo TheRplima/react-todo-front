@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import TodoItem from "../TodoItem/TodoItem";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#F2AA4CFF",
+    },
+  },
+});
 
 export default class TodoList extends Component {
   render() {
@@ -29,18 +37,33 @@ export default class TodoList extends Component {
           />
         );
       });
+    } else {
+      taskData = (
+        <ThemeProvider theme={theme}>
+          <li className="list-group-item d-flex text-capitalize justify-content-between">
+            <div className="row flex-fill">
+              <div className="col-md-12 text-center">You have no assigned taks</div>
+            </div>
+          </li>
+        </ThemeProvider>
+      );
     }
     return (
       <ul className="list-group my-2">
+        {todoDeleteMsg !== "" &&
+        <div className="alert alert-danger mt-4" role="alert">{todoDeleteMsg}</div>}
         <h3 className="text-capitalize">Todo List </h3>
-        <div className="d-flex justify-content-between mb-5">
-          Task and Description
-        </div>
+        <li className="list-group-item d-flex text-capitalize justify-content-between bg-dark bg-gradient text-light">
+          <div className="row flex-fill">
+            <div className="col-md-3">Task</div>
+            <div className="col-md-7">Description</div>
+            <div className="col-md-2 text-center">Actions</div>
+          </div>
+        </li>
         {taskData}
-        <Button color="danger" onClick={clearList}>
+        <Button className="mt-2" color="danger" onClick={clearList}>
           Clear all
         </Button>
-        <p className="text-danger">{todoDeleteMsg}</p>
       </ul>
     );
   }

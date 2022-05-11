@@ -24,18 +24,18 @@ export default class EditTodo extends Component {
           fullWidth
           open={this.props.editTaskDataModal}
           onClose={this.props.onChangeEditTodoHandler}
-          modal={false}
+          modal="false"
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Update Todo</DialogTitle>
           <DialogContent>
-            <DialogContentText>Todo List</DialogContentText>
-            <div className="input-field-container">
+            <div className="input-field-container py-2">
               <ThemeProvider theme={theme}>
                 <TextField
                   autoFocus
                   type="text"
                   name="title"
+                  label="Task Title"
                   placeholder="Task Title"
                   value={this.props.editTaskData.title}
                   onChange={this.props.onChangeEditTodoHandler}
@@ -47,6 +47,7 @@ export default class EditTodo extends Component {
                 <TextField
                   type="text"
                   name="description"
+                  label="Task description"
                   placeholder="Task description"
                   value={this.props.editTaskData.description}
                   onChange={this.props.onChangeEditTodoHandler}
@@ -57,9 +58,8 @@ export default class EditTodo extends Component {
               </ThemeProvider>
             </div>
           </DialogContent>
-          <div class="text-success p-4 mt-2">
-            {this.props.successTodoUpdatedMsg}
-          </div>
+          {this.props.successTodoUpdatedMsg !== "" &&
+            <div className="alert alert-success mt-4" role="alert">{this.props.successTodoUpdatedMsg}</div>}
           <DialogActions>
             <Button onClick={this.props.toggleEditTaskModal} color="primary">
               Cancel
