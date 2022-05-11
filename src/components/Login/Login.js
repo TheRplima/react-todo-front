@@ -93,7 +93,7 @@ export default class Login extends Component {
       return <Navigate to="/todo" />;
     }
     return (
-      <Container className="themed-container mt-2" fluid="sm">
+      <Container className="themed-container mt-2" fluid="md">
         <ThemeProvider theme={theme}>
           <div className="wrapper">
             <div className="text-center">

@@ -118,15 +118,15 @@ export default class Registration extends Component {
 
   render() {
     return (
-      <Container className="themed-container mt-2" fluid="sm">
+      <Container className="themed-container mt-2" fluid="md">
         <div className="text-center">
           <i className="fa fa-2x fa-lock" aria-hidden="true"></i>
           <div className="text-color">Signup</div>
           <div className="hr"></div>
         </div>
         <ThemeProvider theme={theme}>
-          <div className="d-flex justify-content-around mb-5">
-            <div className="txt-first">
+          <div className="row mb-3">
+            <div className="col-md-6">
               <TextField
                 error={this.state.error}
                 name="first_name"
@@ -141,7 +141,7 @@ export default class Registration extends Component {
                 helperText={this.state.errMsgFirstName}
               />
             </div>
-            <div className="txt-last">
+            <div className="col-md-6">
               <TextField
                 error={this.state.error}
                 name="last_name"
@@ -155,70 +155,82 @@ export default class Registration extends Component {
               />
             </div>
           </div>
-          <div className="signup-wrapper">
-            <TextField
-              error={this.state.error}
-              name="phone"
-              label="Phone"
-              type="number"
-              fullWidth
-              variant="outlined"
-              value={this.state.signupData.phone}
-              onChange={this.onChangeHandler}
-              onInput={(e) => {
-                e.target.value = Math.max(0, parseInt(e.target.value))
-                  .toString()
-                  .slice(0, 10);
-              }}
-              min={0}
-              helperText={this.state.errMsgPhone}
-            />
-            <TextField
-              error={this.state.error}
-              name="email"
-              label="Email"
-              type="email"
-              fullWidth
-              variant="outlined"
-              value={this.state.signupData.email}
-              onChange={this.onChangeHandler}
-              helperText={this.state.errMsgEmail}
-            />
-            <div className="show-hide-pwd-wrapper">
+          <div className="row mb-3">
+            <div className="col-md-12">
               <TextField
                 error={this.state.error}
-                name="password"
-                label="Password"
-                type={this.state.hidden ? "password" : "text"}
+                name="phone"
+                label="Phone"
+                type="number"
                 fullWidth
                 variant="outlined"
-                value={this.state.signupData.password}
+                value={this.state.signupData.phone}
                 onChange={this.onChangeHandler}
-                helperText={this.state.errMsgPassword}
-              />
-              <img
-                src={this.state.hidden ? showPwd : hidePwd}
-                onClick={this.toggleShow}
-                alt="showPwd"
-                className="eyeIcon"
+                onInput={(e) => {
+                  e.target.value = Math.max(0, parseInt(e.target.value))
+                    .toString()
+                    .slice(0, 10);
+                }}
+                min={0}
+                helperText={this.state.errMsgPhone}
               />
             </div>
-            <div class=" alert-success pl-5">{this.state.successMsg}</div>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              onClick={this.onSubmitHandler}
-            >
-              SIGN UP
-            </Button>
-            <p className="already-txt ml-5">
-              Already have an account?
-              <Link to="/login" className="sign-in-txt">
-                Sign In
-              </Link>
-            </p>
           </div>
+          <div className="row mb-3">
+            <div className="col-md-12">
+              <TextField
+                error={this.state.error}
+                name="email"
+                label="Email"
+                type="email"
+                fullWidth
+                variant="outlined"
+                value={this.state.signupData.email}
+                onChange={this.onChangeHandler}
+                helperText={this.state.errMsgEmail}
+              />
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col-md-12">
+              <div className="show-hide-pwd-wrapper">
+                <TextField
+                  error={this.state.error}
+                  name="password"
+                  label="Password"
+                  type={this.state.hidden ? "password" : "text"}
+                  fullWidth
+                  variant="outlined"
+                  value={this.state.signupData.password}
+                  onChange={this.onChangeHandler}
+                  helperText={this.state.errMsgPassword}
+                />
+                <img
+                  src={this.state.hidden ? showPwd : hidePwd}
+                  onClick={this.toggleShow}
+                  alt="showPwd"
+                  className="eyeIcon"
+                />
+              </div>
+            </div>
+          </div>
+          {this.state.successMsg !== "" &&
+        <div className="alert alert-success mt-4" role="alert">{this.state.successMsg}</div>}
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            onClick={this.onSubmitHandler}
+          >
+            SIGN UP
+          </Button>
+          <p className="already-txt ml-5">
+            Already have an account?
+            <Link to="/login" className="sign-in-txt">
+              Sign In
+            </Link>
+          </p>
+
         </ThemeProvider>
       </Container>
     );

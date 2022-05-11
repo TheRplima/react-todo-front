@@ -199,37 +199,47 @@ export default class InputItem extends Component {
       return <Navigate to="/log-in" />;
     }
     return (
-      <Container className="themed-container mt-5" fluid="sm">
+      <Container className="themed-container mt-5" fluid="md">
         <div className="input-field-container">
           <ThemeProvider theme={theme}>
-            <TextField
-              type="text"
-              name="title"
-              label="Task Title"
-              placeholder="Task Title"
-              value={title}
-              onChange={this.onChangehandler}
-              color="primary"
-              variant="outlined"
-            />
-            <TextField
-              type="text"
-              name="description"
-              label="Task description"
-              placeholder="Task description"
-              value={description}
-              onChange={this.onChangehandler}
-              color="primary"
-              variant="outlined"
-              style={{ width: "50%" }}
-            />
-            <Button
-              color="success"
-              className="font-weight-bold add-task btn-sm"
-              onClick={this.addItem}
-            >
-              New Task
-            </Button>
+            <div className="row flex-fill">
+              <div className="col-sm-3 mb-2">
+                <TextField
+                  type="text"
+                  name="title"
+                  label="Task Title"
+                  placeholder="Task Title"
+                  value={title}
+                  onChange={this.onChangehandler}
+                  color="primary"
+                  variant="outlined"
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div className="col-sm-7 mb-2">
+                <TextField
+                  type="text"
+                  name="description"
+                  label="Task description"
+                  placeholder="Task description"
+                  value={description}
+                  onChange={this.onChangehandler}
+                  color="primary"
+                  variant="outlined"
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div className="col-sm-2 mb-2">
+                <Button
+                  color="success"
+                  className="font-weight-bold add-task py-3"
+                  onClick={this.addItem}
+                  style={{ width: "100%" }}
+                >
+                  New Task
+                </Button>
+              </div>
+            </div>
           </ThemeProvider>
         </div>
         {this.state.successAlertMsg !== "" &&

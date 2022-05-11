@@ -57,7 +57,7 @@ export default class TodoList extends Component {
           <div className="row flex-fill">
             <div className="col-md-3">Task</div>
             <div className="col-md-7">Description</div>
-            <div className="col-md-2 text-center">Actions</div>
+            <div className="col-md-2">Actions</div>
           </div>
         </li>
         {taskData}
