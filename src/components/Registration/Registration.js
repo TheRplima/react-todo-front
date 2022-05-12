@@ -226,7 +226,7 @@ export default class Registration extends Component {
           </Button>
           <p className="already-txt ml-5">
             Already have an account?
-            <Link to="/login" className="sign-in-txt">
+            <Link to="/" className="sign-in-txt">
               Sign In
             </Link>
           </p>

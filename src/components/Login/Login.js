@@ -58,7 +58,7 @@ export default class Login extends Component {
       .then((response) => response.json())
       .then((result) => {
         if (result.status === 'success') {
-          this.setState({ accessToken: result.token })
+          this.setState({ accessToken: result.token, isLoggedIn: true })
           sessionStorage.setItem('token', result.token)
           sessionStorage.setItem('userName', this.state.loginData.email)
           sessionStorage.setItem('isLoggedIn', true)
@@ -144,7 +144,7 @@ export default class Login extends Component {
                 SIGN IN
               </Button>
               <p to="/sign-up" className="dont-have-txt">
-                Don't have an Account to Signin? <Link to="/" className="signup-txt">SignUp</Link>
+                Don't have an Account to Signin? <Link to="/registration" className="signup-txt">SignUp</Link>
               </p>
             </div>
           </div>

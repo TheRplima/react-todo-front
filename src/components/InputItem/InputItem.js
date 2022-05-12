@@ -237,7 +237,7 @@ export default class InputItem extends Component {
   render() {
     const { title, description } = this.state.taskData;
     if (this.state.isLoggedIn === false) {
-      return <Navigate to="/log-in" />;
+      return <Navigate to="/" />;
     }
     return (
       <Container className="themed-container mt-5" fluid="md">

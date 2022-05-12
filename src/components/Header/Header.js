@@ -25,18 +25,33 @@ export default class Header extends Component {
           window.location.reload();
           sessionStorage.clear();
           let temp = window.location.origin;
-          window.location.href = temp + "/login";
+
+          window.location.href = temp+this.props.basename;
         }
       })
       .catch((error) => console.log("error", error));
   };
   componentDidMount() {
-    let isLoggedIn = sessionStorage.getItem("isLoggedIn");
-    this.setState({ isLoggedIn: isLoggedIn });
+    this.setState({ isLoggedIn: sessionStorage.getItem("isLoggedIn") });
   }
   render() {
     const { isLoggedIn } = this.state;
     let logoutDiv = null;
+    console.log(isLoggedIn)
+    if (isLoggedIn === null) {
+      logoutDiv = (
+        <AppBar
+          position="static"
+          style={{ color: "black", backgroundColor: "#F2AA4CFF" }}
+        >
+          <Toolbar
+            style={{ display: " flex", justifyContent: "space-between" }}
+          >
+            <Typography variant="h6">Todo App</Typography>
+          </Toolbar>
+        </AppBar>
+      );
+    }
     if (isLoggedIn === "true") {
       logoutDiv = (
         <AppBar
@@ -53,20 +68,6 @@ export default class Header extends Component {
       );
     }
 
-    if (isLoggedIn === null) {
-      logoutDiv = (
-        <AppBar
-          position="static"
-          style={{ color: "black", backgroundColor: "#F2AA4CFF" }}
-        >
-          <Toolbar
-            style={{ display: " flex", justifyContent: "space-between" }}
-          >
-            <Typography variant="h6">Todo App</Typography>
-          </Toolbar>
-        </AppBar>
-      );
-    }
     return <div>{logoutDiv}</div>;
   }
 }

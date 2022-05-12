@@ -14,10 +14,10 @@ export default class App extends Component {
   render() {
     return (
       <Router basename="/react-todo-front">
-        <Header />
+        <Header basename="/react-todo-front" />
         <Routes>
-          <Route path="/" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
           <Route path="/todo" element={<InputItem />} />
         </Routes>
       </Router>
