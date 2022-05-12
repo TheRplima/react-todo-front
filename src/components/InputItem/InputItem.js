@@ -108,6 +108,9 @@ export default class InputItem extends Component {
     });
   };
   handleDelete = (id) => {
+    if (!window.confirm('Are you sure want to delete this task?')){
+      return;
+    }
     let token = sessionStorage.getItem("token");
     var requestOptions = {
       method: "DELETE",
@@ -196,6 +199,12 @@ export default class InputItem extends Component {
   };
   handleCompleteTodo = (task) => {
     let { id, title, description, completed } = task;
+
+    let confirmMessage = 'Are you sure want to set this task as '+(!completed?'completed?':'uncompleted?');
+    if (!window.confirm(confirmMessage)){
+      return;
+    }
+
     let token = sessionStorage.getItem("token");
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
